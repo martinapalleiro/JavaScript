@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+     <head>
+          <script>
+ 
+               function guardar() {
+                         
+                          var tbody=document.getElementById('tbody')
+                          var numFila=tbody.rows.length
+                          for (x=0; x<numFila;x++){
+                               if(tbody.rows[x].childNodes[0].innerHTML===document.getElementById("Id").value){
+                               (tbody.rows[x].childNodes[1].innerHTML=document.getElementById("Nombre").value)
+                               (tbody.rows[x].childNodes[2].innerHTML=document.getElementById("Apellido").value)
+                               document.getElementById('Id').value=""
+                               document.getElementById('Nombre').value=""
+                               document.getElementById('Apellido').value=""
+                               return
+                          } 
+                         }
+                          var fila=tbody.insertRow()
+                          fila.setAttribute("id","fila_"+ numFila)
+                          var celda=fila.insertCell()
+                          celda.innerHTML=numFila
+                          celda=fila.insertCell()
+                          celda.innerHTML=document.getElementById('Nombre').value
+                          celda=fila.insertCell()
+                          celda.innerHTML=document.getElementById('Apellido').value
+                          celda=fila.insertCell()
+                          celda.innerHTML = "<button onclick='ver("+ numFila + ")' >Ver</button>"
+                          celda=fila.insertCell()
+                          celda.innerHTML = "<button onclick='borrar("+ numFila + ")'>Borrar</button>"
+                          document.getElementById('Nombre').value=""
+                          document.getElementById('Apellido').value=""
+                           }
+                    function ver(fila){
+                        // console.log(fila)
+                        document.getElementById("Id").value = document.getElementById("fila_"+fila).childNodes[0].innerHTML
+                        document.getElementById("Nombre").value = document.getElementById("fila_"+fila).childNodes[1].innerHTML
+                        document.getElementById("Apellido").value = document.getElementById("fila_"+fila).childNodes[2].innerHTML
+                    }     
+                    function borrar(fila){
+                       document.getElementById("fila_"+fila).remove()  
+                    }  
+          </script>
+     </head>
+     <body>
+           <button id="boton1" onclick="cambiarNombre()">BOTON1</button>
+            <table border= "1">
+              <thead>
+             <tr> 
+                 <th>Id</th> 
+                 <th>Nombre</th> 
+                 <th>Apellido</th> 
+                 <th></th> 
+                 <th></th> 
+              </tr>
+            </thead>
+            <tbody id="tbody">
+            </tbody>
+            <tfoot>
+              <tr>
+                 <td><input id="Id" readonly/></td>
+                 <td><input id="Nombre"/></td>
+                 <td><input id="Apellido"/></td>
+                 <td colspan="2" style="text-align: center;"><button onclick= "guardar()">Guardar</button></td>
+               
+              </tr>
+            </tfoot>
+            </table>
+     </body>
+</html>
